@@ -1,5 +1,5 @@
 /**
- * Created by Alex on 11/2/16.
+ * Created by Alex on 1/25/17.
  * This is the backstop.js config file for CSS regression testing for projects
  * Designed to be reusable and easy to configure
  * https://github.com/garris/BackstopJS for detailed documentation
@@ -8,18 +8,17 @@
 
 //Different base URL's based on environment
 var baseUrl = {
-    local: "http://localhost:8080/site/",
-    qa: "http://ax-qa.couchbase.com/",
-    stage: "http://ax-stage.couchbase.com/",
-    prod: "http://www.couchbase.com/"
+    prod: "http://www.kohler.co.in/",
+    indiaTest: "http://plumbingindia.kohlerco.test.us.onehippo.com/",
+    brazilTest: "http://plumbingbrazil.kohlerco.test.us.onehippo.com/"
 };
 
 //Change testing Environment here by changing baseUrl suffix
-var BASE_URL = baseUrl.qa;
+var BASE_URL = baseUrl.indiaTest;
 
 //Can be enabled to test url against base_url. To enable, uncomment BASE_REFERENCE_URL variable and referenceUrl object
 //in the loopThroughUrlArray function and parameter
-//var BASE_REFERENCE_URL = baseUrl.stage;
+var BASE_REFERENCE_URL = baseUrl.prod;
 
 //Selectors that are selected for every test, can leave empty or add multiple selectors such as:
 // var DEFAULT_SELECTORS = ["selector1","selector2"]
@@ -42,36 +41,37 @@ var DEFAULT_SELECTORS = ["document"];
 
 
 var configList = [{
-    url: "about",
-    hide: [
-        "#global-content > div.generic-header > div"
-    ],
-    selector:[
-        "document",
-        "#global-content > div.generic-header > div > div",
-        "#global-footer > div > div > ul > li:nth-child(1) > a"]
-
+    url: "" //home
 },{
-    url: "nosql-resources/why-nosql",
-    selector:"document"
+    url: "browse/Bathroom/Sink+Faucets"
 },{
-    url: "azure",
-    selector:"main"
+    url: "browse/Kitchen/Kitchen+Faucets"
+},{
+    url: "product-detail/2369"
+},{
+    url: "about-us"
+},{
+    url: "store-listing"
+},{
+    url: "press-releases"
+},{
+    url: "results?search=vibrant&currentpage=1&orderBy=relevancy&sort=asc"
+},{
+    url: "contact-us"
+},{
+    url: "literature"
+},{
+    url: "care-and-cleaning---kitchen-sinks"
+},{
+    url: "faqs"
 }];
 
 
 /**
  *
- *
- *
- *
- *
- *
+
  * Do not edit anything below these comments
  * Only the above code needs to be changed
- *
- *
- *
  *
  *
  *
@@ -85,6 +85,12 @@ if (BASE_URL == undefined) {
 } else {
     console.log("BASE_URL is: " + BASE_URL);
 }
+
+if (DEFAULT_SELECTORS != undefined){
+    console.log("DEFAULT_SELECTORS ARE: ")
+    console.log(DEFAULT_SELECTORS)
+}
+
 console.log("****************");
 
 //Function to reduce redundancy and make code easier to read and manage
@@ -92,18 +98,18 @@ console.log("****************");
 function loopThroughUrlArray() {
 
     var scenarios = [];
-
+    var selectorsArray = [];
     for (var prop in configList) {
 
-        // // If there is another selector in configList, add it to selector array
-        // if (typeof configList[prop].selector !== 'undefined') {
-        //     selectors.push(configList[prop].selector);
-        // }
-
-        var selectorsArray = [configList[prop].selector];
-        selectorsArray.push(DEFAULT_SELECTORS);
-        selectorsArray = [].concat.apply([], selectorsArray);
-
+        //Conditional to prevent error when only default selectors are being used.
+        if (configList[prop].selector == undefined){
+            selectorsArray = DEFAULT_SELECTORS;
+        } else {
+            selectorsArray = [configList[prop].selector];
+            selectorsArray.push(DEFAULT_SELECTORS);
+            selectorsArray = [].concat.apply([], selectorsArray);
+        }
+        //Concating allows the merge of two arrays into one
         var hideSelectorsArray = [configList[prop].hide];
         hideSelectorsArray = [].concat.apply([], hideSelectorsArray);
 
@@ -114,7 +120,7 @@ function loopThroughUrlArray() {
             "label": BASE_URL + configList[prop].url,
             "url": BASE_URL + configList[prop].url,
             //reference URL can be enabled that tests url against referenceUrl
-            //"referenceUrl": BASE_REFERENCE_URL + configList[prop].url,
+            "referenceUrl": BASE_REFERENCE_URL + configList[prop].url,
             "hideSelectors": hideSelectorsArray,
             "removeSelectors": removeSelectorsArray,
             "selectors":  selectorsArray,
@@ -153,7 +159,7 @@ function provideLogging(url,hide,remove,referenceUrl){
 }
 
 //JSON object that is being exported for Backstop
-var exporting = { "id": "prod_test",
+var exporting = { "id": "testdesktop01",
     "viewports": [
         {
             "name": "desktop",
@@ -165,19 +171,18 @@ var exporting = { "id": "prod_test",
         loopThroughUrlArray(),
 
     "paths": {
-        "bitmaps_reference": "backstop_data/bitmaps_reference",
-        "bitmaps_test": "backstop_data/bitmaps_test",
-        "casper_scripts": "backstop_data/casper_scripts",
-        "html_report": "backstop_data/html_report",
-        "ci_report": "backstop_data/ci_report"
+        "bitmaps_reference": "Projects/Prototype_Example/backstop_data/bitmaps_reference",
+        "bitmaps_test": "Projects/Prototype_Example/backstop_data/bitmaps_test",
+        "casper_scripts": "Projects/Prototype_Example/backstop_data/casper_scripts",
+        "html_report": "Projects/Prototype_Example/backstop_data/html_report",
+        "ci_report": "Projects/Prototype_Example/backstop_data/ci_report"
     },
     "casperFlags": [],
-    "engine": "phantomjs",
+    "engine": "slimerjs",
     "report": ["browser"],
     "debug": false
 };
 
-// console.log(exporting);
 //Backstop only looks for config data in module.exports. Change export to change configs
 module.exports = exporting;
 

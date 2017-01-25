@@ -25,7 +25,7 @@ If your project is not in ```Projects```, create a new one with your project nam
 
 If you already have a project you can skip forward to the next section. 
 
-If a new folder is created, copy everything inside of ```backstopJS/Projects/Prototype``` into your project folder.  (This includes a backstop_data folder and backstop.js file)
+If a new folder is created, copy everything inside of ```backstopJS/Projects/Prototype_Example``` into your project folder.  (This includes a backstop_data folder and backstop.js file)
 
 Use the new ```backstop.js``` file as a template to begin customizing your project in ```backstopJs/Projects/ProjectName/backstop.js```
 
