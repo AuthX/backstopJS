@@ -1,6 +1,6 @@
 # backstopJS 
 
-#####Required:
+##### Required:
 https://github.com/creationix/nvm (recommended) or https://www.npmjs.com/
 
 To install **nvm**, run in your terminal:
@@ -8,7 +8,7 @@ To install **nvm**, run in your terminal:
  ```curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash```
 
 In-Depth documentation on using backstop: https://github.com/garris/BackstopJS
-##Install
+## Install
 Install by clicking the download button either by zip or `git clone urlGoesHere`
 in the directory of your choice. 
 
