@@ -1,4 +1,4 @@
-# backstopJS 
+# backstopJS 2.0
 
 ##### Required:
 https://github.com/creationix/nvm (recommended) or https://www.npmjs.com/
@@ -27,22 +27,13 @@ If your project is not in ```Projects```, create a new one with your project nam
 
 If you already have a project you can skip forward to the next section. 
 
-If a new folder is created, copy everything inside of ```backstopJS/Projects/Prototype_Example``` into your project folder.  (This includes a backstop_data folder and backstop.js file)
 
-Use the new ```backstop.js``` file as a template to begin customizing your project in ```backstopJs/Projects/ProjectName/backstop.js```
+1. ```npm install -g backstopjs```
+2. ```backstop init```
+3. ```backstop reference``` Optional -> (--configPath=PathToJsFile.js)
+4. ```backstop test```
 
-#### Make sure you edit the paths at the bottom of the JS file to include the full path
-```json
-"paths": {
-        "bitmaps_reference": "Projects/Unit4/AccVsProd/Mobile/backstop_data/bitmaps_reference",
-        "bitmaps_test": "Projects/Unit4/AccVsProd/Mobile/backstop_data/bitmaps_test",
-        "casper_scripts": "Projects/Unit4/AccVsProd/Mobile/backstop_data/casper_scripts",
-        "html_report": "Projects/Unit4/AccVsProd/Mobile/backstop_data/html_report",
-        "ci_report": "Projects/Unit4/AccVsProd/Mobile/backstop_data/ci_report"
-    },
-```
-
-For guidance, refer to other projects to see different implementations. 
+<!-- For guidance, refer to other projects to see different implementations. 
 ## To run reference
 Reference creates a directory of screenshots that you want to use as your reference.
 
@@ -69,6 +60,6 @@ npm run test -- --configPath=PathToJsFile.js
 npm run test -- --configPath=Projects/Unit4/AccVsProd/Mobile/mobile.js
 ```
 
-
+ -->
 
 
